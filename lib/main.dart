@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'Layout/Tugas_2.dart';
+import 'package:tugas_3/Layout/Tugas_2.dart';
+import 'package:tugas_3/Loginscreen/Login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const Tugas_2(),
+      home: const Login(),
       debugShowCheckedModeBanner: false,
     );
   }
