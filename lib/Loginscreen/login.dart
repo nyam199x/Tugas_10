@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tugas_3/Navigation/Navigation.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -32,24 +33,30 @@ class _LoginState extends State<Login> {
           const SizedBox(height: 30),
           Column(
             children: [
-              const Text(
-                'Hello Welcome back',
-                style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  'Hello Welcome back',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
 
               const SizedBox(height: 16),
-
-              const Text(
-                'Welcome back please\nsign in again',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey,
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  'Welcome back please\nsign in again',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey,
+                  ),
                 ),
               ),
             ],
@@ -109,17 +116,25 @@ class _LoginState extends State<Login> {
 
           const SizedBox(height: 50), //Jarak dari password ke login
 
-          Container(
-            alignment: Alignment.center,
-            height: 50,
-            width: 270,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            child: Text(
-              'Login',
-              style: TextStyle(fontSize: 16, color: Colors.black),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Navigation()),
+              );
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 50,
+              width: 270,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              child: Text(
+                'Login',
+                style: TextStyle(fontSize: 16, color: Colors.black),
+              ),
             ),
           ),
 
