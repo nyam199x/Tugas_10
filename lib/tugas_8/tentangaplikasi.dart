@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:tugas_3/constant/app_colors.dart';
+import 'package:tugas_3/constant/app_text.dart';
 
 class TentangAplikasi extends StatefulWidget {
   const TentangAplikasi({super.key});
@@ -19,11 +20,11 @@ class _TentangAplikasiState extends State<TentangAplikasi> {
           children: const [
             // JUDUL APLIKASI
             Text(
-              'Nama Aplikasi',
+              AppText.NamaAplikasi,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: AppColors.primary,
               ),
             ),
 

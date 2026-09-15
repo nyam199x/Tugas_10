@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_3/tugas_8/tentangaplikasi.dart';
+import 'package:tugas_3/tugas_8/menudrawer.dart';
+import 'package:tugas_3/Tugas_9/listview.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -15,12 +17,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
   String? selected;
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
-  int _selectedIndex = 0;
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   void _onTap(int index) {
     setState(() {
@@ -275,9 +271,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return Scaffold(
       backgroundColor: _isDarkMode ? Colors.black : Colors.white,
       appBar: AppBar(
-        title: Text(
-          _currentIndex == 0 ? 'Syarat dan Ketentuan' : 'Deskripsi',
-        ),
+        title: Text(_currentIndex == 0 ? 'Syarat dan Ketentuan' : 'Deskripsi'),
         titleTextStyle: TextStyle(color: Colors.white, fontSize: 22),
         centerTitle: true,
         backgroundColor: _isDarkMode ? Colors.black : Colors.grey,
@@ -302,21 +296,31 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
             ListTile(
               leading: const Icon(Icons.home),
-              title: const Text('latihan Icon Avatar'),
-              selected: _selectedIndex == 0,
+              title: const Text('home'),
               onTap: () {
-                _onItemTapped(0);
                 Navigator.pop(context);
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LatihanIconAvatar(),
+                  ),
+                );
               },
             ),
 
             ListTile(
               leading: const Icon(Icons.home),
-              title: const Text('latihan Icon Avatar'),
-              selected: _selectedIndex == 0,
+              title: const Text('list view'),
               onTap: () {
-                _onItemTapped(0);
                 Navigator.pop(context);
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ListKategoriText(),
+                  ),
+                );
               },
             ),
           ],

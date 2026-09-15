@@ -5,6 +5,7 @@ class AppText {
   static const String Penjelasan = 'Penjelasan Singkat';
   static const String pilihKategori = 'Silakan pilih kategori';
 
+  static const String NamaAplikasi = 'Shoppe';
   static const String elektronik = 'Elektronik';
   static const String fashionPria = 'Fashion Pria';
   static const String fashionWanita = 'Fashion Wanita';
