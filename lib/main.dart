@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 // import 'package:tugas_3/tugas_8/bottomnavigationbar.dart';
 import 'package:tugas_3/Tugas_9/listview.dart';
 import 'package:tugas_3/tugas_8/bottomnavigationbar.dart';
-
+import 'package:tugas_3/Tugas_10/Pendaftaran.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const BottomNavBar(),
+      home: const SignUp(),
       debugShowCheckedModeBanner: false,
     );
   }
