@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+// import 'package:tugas_3/Tugas_5/Tugas_3.dart';
+// import 'package:tugas_3/Tugas_5/Tugas_4.dart';
+
 // import 'package:tugas_3/Layout/Tugas_2.dart';
 // import 'package:tugas_3/Loginscreen/Login.dart';
 // import 'package:tugas_3/Navigation/Navigation.dart';
 // import 'package:tugas_3/tugas_8/bottomnavigationbar.dart';
-import 'package:tugas_3/Tugas_9/listview.dart';
-import 'package:tugas_3/tugas_8/bottomnavigationbar.dart';
-import 'package:tugas_3/Tugas_10/Pendaftaran.dart';
+// import 'package:tugas_3/Tugas_9/listview.dart';
+// import 'package:tugas_3/tugas_8/bottomnavigationbar.dart';
+// import 'package:tugas_3/Tugas_10/Pendaftaran.dart';
+import 'package:tugas_3/tugas_11/preference_handle.dart';
+import 'package:tugas_3/tugas_11/SplashScreen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await PreferenceHandler.init();
   runApp(const MyApp());
 }
 
@@ -22,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const SignUp(),
+      home: const SplashScreenDay15(),
       debugShowCheckedModeBanner: false,
     );
   }
