@@ -1,34 +1,60 @@
 import 'package:flutter/material.dart';
-import 'package:tugas_3/tugas_11/logout.dart';
-import 'package:tugas_3/tugas_11/preference_handle.dart';
-import 'package:tugas_3/tugas_11/navigator.dart';
+import 'package:tugas_3/Tugas_12/db/database/db_helper.dart';
+import 'package:tugas_3/Tugas_12/navigator.dart';
+import 'package:tugas_3/Tugas_12/home.dart';
 
-class LoginScreenDay15 extends StatefulWidget {
-  final bool showLogoutMessage; // ← tambahkan
-  const LoginScreenDay15({super.key, this.showLogoutMessage = false});
+// import 'package:ppkdju_01/day_17/services/db_helper.dart';
+// import 'package:ppkdju_01/day_17/views/home_screen.dart';
+// import 'package:ppkdju_01/extension/navigator.dart';
 
+/// ============================================================================
+/// VIEW: Login12
+/// ============================================================================
+/// Halaman masuk (login) untuk memverifikasi akun pengguna terhadap data
+/// yang tersimpan di database lokal SQLite.
+class Login12 extends StatefulWidget {
+  const Login12({super.key});
   @override
-  State<LoginScreenDay15> createState() => _LoginScreenDay15State();
+  State<Login12> createState() => _Login12State();
 }
 
-class _LoginScreenDay15State extends State<LoginScreenDay15> {
+class _Login12State extends State<Login12> {
+  // Variabel untuk mengontrol apakah password disamarkan (true) atau terlihat (false)
+  bool obsecure = true;
+  // Key unik untuk mengidentifikasi Form dan menjalankan validasi (_formKey.currentState!.validate())
   final _formKey = GlobalKey<FormState>();
+  // Controller untuk membaca dan mengontrol teks input
   final emailController = TextEditingController();
-  final passController = TextEditingController();
+  final passwordController = TextEditingController();
 
-  //menu visual fedback
-  @override
-  void initState() {
-    super.initState();
-    if (widget.showLogoutMessage) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Berhasil Logout'),
-            duration: Duration(seconds: 2),
-          ),
-        );
-      });
+  /// --------------------------------------------------------------------------
+  /// Logika Login
+  /// --------------------------------------------------------------------------
+  void login() async {
+    final user = emailController.text.trim();
+    final pass = passwordController.text;
+    // Pengecekan awal: pastikan field tidak kosong
+    if (user.isEmpty || pass.isEmpty) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Isi semua field!')));
+      return;
+    }
+    // 1. Mencari user di SQLite melalui DBHelper
+    final pengguna = await DBHelper().loginUser(user, pass);
+    
+    // 2. Cegah error jika user sudah berpindah halaman sebelum proses async selesai
+    if (!mounted) return;
+    // 3. Evaluasi hasil query
+    if (pengguna != null) {
+      // Jika ditemukan, tampilkan pesan sukses dan pindah ke halaman Home
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Login berhasil')));
+      context.push(Home12());
+    } else {
+      // Jika hasil null, berarti email belum ada atau password salah
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Email belum terdaftar / password salah')),
+      );
     }
   }
 
@@ -49,22 +75,18 @@ class _LoginScreenDay15State extends State<LoginScreenDay15> {
                     // ICON
                     // =========================
                     const Icon(Icons.lock, size: 80, color: Colors.blue),
-
                     const SizedBox(height: 24),
-
                     // =========================
                     // TITLE
                     // =========================
                     const Text(
-                      'Login',
+                      'login',
                       style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
                     const SizedBox(height: 8),
-
                     // =========================
                     // SUBTITLE
                     // =========================
@@ -72,9 +94,7 @@ class _LoginScreenDay15State extends State<LoginScreenDay15> {
                       'Silakan masuk ke akun Anda',
                       style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
-
                     const SizedBox(height: 32),
-
                     // =========================
                     // EMAIL
                     // =========================
@@ -97,15 +117,13 @@ class _LoginScreenDay15State extends State<LoginScreenDay15> {
                         ),
                       ),
                     ),
-
                     const SizedBox(height: 16),
-
                     // =========================
                     // PASSWORD
                     // =========================
                     TextFormField(
-                      controller: passController,
-                      obscureText: true,
+                      controller: passwordController,
+                      obscureText: obsecure,
                       decoration: InputDecoration(
                         labelText: 'Password',
                         hintText: 'Masukkan password',
@@ -113,11 +131,19 @@ class _LoginScreenDay15State extends State<LoginScreenDay15> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              obsecure = !obsecure;
+                            });
+                          },
+                          icon: Icon(
+                            obsecure ? Icons.visibility : Icons.visibility_off,
+                          ),
+                        ),
                       ),
                     ),
-
                     const SizedBox(height: 24),
-
                     // =========================
                     // BUTTON
                     // =========================
@@ -129,47 +155,17 @@ class _LoginScreenDay15State extends State<LoginScreenDay15> {
                           // textStyle: TextStyle(color: Colors.white),
                         ),
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            showDialog(
-                              context: context,
-                              builder: (_) => AlertDialog(
-                                title: Text('Data '),
-                                content: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Email: ${emailController.text}'),
-                                  ],
-                                ), // Column
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      context.pop();
-                                      PreferenceHandler.setLogin(true);
-                                      context.push(
-                                        HalamanTerimaKasih(
-                                          email: emailController.text,
-                                        ),
-                                      );
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) =>
-                                      //         HalamanTerimaKasih(
-                                      //           email: emailController.text,
-                                      //         ),
-                                      //   ), // MaterialPageRoute
-                                      // );
-                                    },
-                                    child: Text('Lanjutkan'),
-                                  ), // TextButtontton
-                                ],
-                              ), // AlertDialog
-                            );
+                          debugPrint('TOMBOL DITEKAN');
+                          final valid = _formKey.currentState
+                              ?.validate(); // 👈 baris baru
+                          debugPrint('validate: $valid');
+                          if (valid == true) {
+                            // 👈 diganti
+                            login();
                           }
                         },
                         child: const Text(
-                          'Login',
+                          'login',
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
