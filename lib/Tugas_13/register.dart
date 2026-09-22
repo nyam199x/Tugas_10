@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_3/Tugas_12/db/database/db_helper.dart';
 import 'package:tugas_3/Tugas_12/db/models/user_login_model.dart';
-import 'package:tugas_3/Tugas_12/login.dart';
-import 'package:tugas_3/Tugas_12/navigator.dart';
-
-
+import 'package:tugas_3/Tugas_13/login.dart';
+import 'package:tugas_3/Tugas_13/navigator.dart';
 
 /// ============================================================================
 /// Halaman pendaftaran (registrasi) akun pengguna baru.
 /// Data yang diinputkan akan disimpan secara permanen ke dalam tabel 'users'
 /// di database lokal SQLite.
-class Register12 extends StatefulWidget {
-  const Register12({super.key});
+class Register13 extends StatefulWidget {
+  const Register13({super.key});
   @override
-  State<Register12> createState() => _Register12State();
+  State<Register13> createState() => _Register13State();
 }
 
-class _Register12State extends State<Register12> {
+class _Register13State extends State<Register13> {
   // Kontrol visibilitas password (true = disamarkan dengan tanda titik)
   bool obsecure = true;
   // Key untuk validasi form
@@ -56,7 +54,7 @@ class _Register12State extends State<Register12> {
         const SnackBar(content: Text('Akun berhasil dibuat! Silakan login.')),
       );
       // Pindah ke halaman Login jika pendaftaran berhasil
-      context.push(Login12());
+      context.push(Login13());
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_3/Tugas_12/db/database/db_helper.dart';
-import 'package:tugas_3/Tugas_12/navigator.dart';
-import 'package:tugas_3/Tugas_12/home.dart';
+import 'package:tugas_3/Tugas_13/navigator.dart';
+import 'package:tugas_3/Tugas_13/home.dart';
 
 
 /// ============================================================================
-/// VIEW: Login12
+/// VIEW: Login13
 /// ============================================================================
 /// Halaman masuk (login) untuk memverifikasi akun pengguna terhadap data
 /// yang tersimpan di database lokal SQLite.
-class Login12 extends StatefulWidget {
-  const Login12({super.key});
+class Login13 extends StatefulWidget {
+  const Login13({super.key});
   @override
-  State<Login12> createState() => _Login12State();
+  State<Login13> createState() => _Login13State();
 }
 
-class _Login12State extends State<Login12> {
+class _Login13State extends State<Login13> {
   // Variabel untuk mengontrol apakah password disamarkan (true) atau terlihat (false)
   bool obsecure = true;
   // Key unik untuk mengidentifikasi Form dan menjalankan validasi (_formKey.currentState!.validate())
@@ -46,7 +46,7 @@ class _Login12State extends State<Login12> {
       // Jika ditemukan, tampilkan pesan sukses dan pindah ke halaman Home
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('Login berhasil')));
-      context.push(Home12());
+      context.push(Home13());
     } else {
       // Jika hasil null, berarti email belum ada atau password salah
       ScaffoldMessenger.of(context).showSnackBar(

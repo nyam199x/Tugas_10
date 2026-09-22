@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tugas_3/Tugas_12/register.dart';
+// import 'package:tugas_3/Tugas_12/register.dart';
 
+import 'package:tugas_3/Tugas_13/register.dart';
 // import 'package:tugas_3/test/splash_test.dart';
 // import 'package:tugas_3/Tugas_5/Tugas_3.dart';
 // import 'package:tugas_3/Tugas_5/Tugas_4.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const Register12(),
+      home: const Register13(),
       debugShowCheckedModeBanner: false,
     );
   }
