@@ -46,7 +46,7 @@ class _Login13State extends State<Login13> {
       // Jika ditemukan, tampilkan pesan sukses dan pindah ke halaman Home
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('Login berhasil')));
-      context.push(Home13());
+      context.push(Home13(email: '',));
     } else {
       // Jika hasil null, berarti email belum ada atau password salah
       ScaffoldMessenger.of(context).showSnackBar(

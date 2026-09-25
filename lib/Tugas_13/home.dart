@@ -11,7 +11,7 @@ import 'package:tugas_3/Tugas_12/db/models/user_login_model.dart';
 /// Kita menggunakan [StatefulWidget] agar halaman ini dapat me-refresh (memuat
 /// ulang) data pengguna secara otomatis ketika ada aksi Tambah.
 class Home13 extends StatefulWidget {
-  const Home13({super.key});
+  const Home13({super.key, required String email});
   @override
   State<Home13> createState() => _Home13State();
 }
@@ -72,7 +72,10 @@ class _Home13State extends State<Home13> {
                 await DBHelper().deleteUser(user.id!);
                 if (!mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('${user.name} berhasil dihapus')),
+                  SnackBar(
+                    content: Text('${user.name} berhasil dihapus'),
+                    duration: const Duration(seconds: 5),
+                  ),
                 );
                 _refreshUsers();
               }
